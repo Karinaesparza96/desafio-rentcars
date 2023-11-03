@@ -1,16 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BaseService } from './base.service';
+
 import { Observable, Subject, catchError, map, tap } from 'rxjs';
+
+import { BaseService } from './base.service';
+
 import { Veiculo } from '../models/Veiculo';
 import { CustomResponse } from 'src/app/veiculos/interfaces/CustomResponse';
 
 @Injectable()
 export class VeiculoService extends BaseService {
+  private notificarParaAtualizarListaSubject = new Subject<boolean>()
+  notificarParaAtualizarLista$ = this.notificarParaAtualizarListaSubject.asObservable();
 
   constructor(private http: HttpClient) { super() }
-  private notificarSubject = new Subject<boolean>()
-  notificarParaAtualizarLista$ = this.notificarSubject.asObservable();
 
   obterPorId(id: string): Observable<Veiculo> {
     return this.http
@@ -30,7 +33,7 @@ export class VeiculoService extends BaseService {
       .pipe(
         map((response: CustomResponse<Veiculo>) => response),
         catchError(super.extrairErros),
-        tap(_ => this.notificarSubject.next(true)),
+        tap(_ => this.notificarParaAtualizarListaSubject.next(true)),
       )
   }
 
@@ -39,7 +42,7 @@ export class VeiculoService extends BaseService {
       .put(`${this.BASE_URL}veiculos/${veiculo.id}`, veiculo)
       .pipe(
         map((response: CustomResponse<Veiculo>) => response),
-        tap(_ => this.notificarSubject.next(true)),
+        tap(_ => this.notificarParaAtualizarListaSubject.next(true)),
         catchError(super.extrairErros),
       )
   }
@@ -47,7 +50,8 @@ export class VeiculoService extends BaseService {
   excluirVeiculo(id: string) {
     return this.http
       .delete(`${this.BASE_URL}veiculos/${id}`)
-      .pipe(catchError(super.extrairErros), tap(_ => this.notificarSubject.next(true)),)
+      .pipe(catchError(super.extrairErros),
+        tap(_ => this.notificarParaAtualizarListaSubject.next(true)),)
   }
 
 

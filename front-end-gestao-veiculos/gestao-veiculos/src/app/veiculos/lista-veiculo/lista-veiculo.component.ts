@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
-import { VeiculosDataSource } from './veiculo-data-source';
+import { filter, switchMap } from 'rxjs';
+
+import { NotificarVeiculoService } from '../services/notificarVeiculo.service';
 import { VeiculoService } from '../services/veiculo.service';
+import { VeiculosDataSource } from './veiculo-data-source';
+
+import { CustomResponse } from 'src/app/veiculos/interfaces/CustomResponse';
+import { Veiculo } from '../models/Veiculo';
+
 import { DialogService } from 'src/app/shared/components/dialog/dialog.service';
 import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
-import { CustomResponse } from 'src/app/veiculos/interfaces/CustomResponse';
-import { filter, switchMap } from 'rxjs';
-import { Veiculo } from '../models/Veiculo';
-import { NotificarVeiculoService } from '../services/notificarVeiculo.service';
 
 @Component({
   selector: 'app-lista-veiculo',
@@ -41,12 +44,11 @@ export class ListaVeiculoComponent implements OnInit {
   ngOnInit(): void {
     this.veiculosService
       .notificarParaAtualizarLista$
-      .subscribe(() => this.atualizarLista())
+      .subscribe(() => this.atualizarLista());
 
     this.dataSource = new VeiculosDataSource(this.veiculosService);
 
-    this.atualizarLista()
-
+    this.atualizarLista();
   }
 
   openSnackBar(message: string) {
@@ -78,7 +80,7 @@ export class ListaVeiculoComponent implements OnInit {
       .openDialogConfirmDelete(veiculo)
       .afterClosed()
       .pipe(
-        filter((confirm: boolean) => confirm === true),
+        filter((confirm: boolean) => confirm),
         switchMap(() => this.veiculosService.excluirVeiculo(veiculo.id))
       )
       .subscribe((res: CustomResponse<Veiculo>) => {

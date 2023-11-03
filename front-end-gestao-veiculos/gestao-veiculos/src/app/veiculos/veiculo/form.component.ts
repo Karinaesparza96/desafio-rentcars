@@ -2,17 +2,19 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, ViewChildren }
 import { FormBuilder, FormControlName, FormGroup, NgForm, Validators, } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
+import { Observable } from 'rxjs';
+
 import { Locadora } from '../models/Locadora';
 import { Veiculo } from '../models/Veiculo';
-
-import { FormBaseComponent } from 'src/app/base-components/form-base-component';
-import { VeiculoService } from '../services/veiculo.service';
 import { CustomResponse } from 'src/app/veiculos/interfaces/CustomResponse';
-import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
 import { mensagensValidacao } from '../validation/mensagens-validacao';
+
+import { VeiculoService } from '../services/veiculo.service';
 import { LocadoraService } from '../services/locadora.service';
-import { Observable } from 'rxjs';
 import { NotificarVeiculoService } from '../services/notificarVeiculo.service';
+
+import { SnackBarComponent } from 'src/app/shared/components/snack-bar/snack-bar.component';
+import { FormBaseComponent } from 'src/app/base-components/form-base-component';
 
 @Component({
   selector: 'app-veiculo-form',
@@ -58,6 +60,7 @@ export class VeiculoFormComponent extends FormBaseComponent implements OnInit, A
       this.atualizarFormularioComVeiculo()
     })
   }
+
   atualizarFormularioComVeiculo() {
     if (this.veiculo) {
       this.formVeiculo.patchValue({ ...this.veiculo });

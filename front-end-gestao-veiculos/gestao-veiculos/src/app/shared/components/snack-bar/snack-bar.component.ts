@@ -21,5 +21,4 @@ export class SnackBarComponent {
   snackBarRef = inject(MatSnackBarRef);
   data: string = inject(MAT_SNACK_BAR_DATA)
 
-
 }

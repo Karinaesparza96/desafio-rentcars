@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from './confirm-dialog.component';
+
 import { Veiculo } from 'src/app/veiculos/models/Veiculo';
+
+import { ConfirmDialogComponent } from './confirm-dialog.component';
 
 @Injectable({ providedIn: 'root' })
 export class DialogService {
@@ -25,7 +27,7 @@ export class DialogService {
 
     dialogConfig.data = {
       title: 'Tem certeza que deseja excluir este registro?',
-      description: `${veiculo.locadora.nome}, ${veiculo.modelo}, ${veiculo.marca}`,
+      description: `Locadora: ${veiculo.locadora.nome}, Modelo: ${veiculo.modelo}, Marca: ${veiculo.marca}`,
     }
     return this.dialog.open(ConfirmDialogComponent, dialogConfig)
   }
