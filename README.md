@@ -46,10 +46,6 @@ Espera-se um banco MySql 8.0 rodando no localhost na porta 3307
 10. Rode `npm install` para instalar as dependências
 11. Rode `npm start` aguarde iniciar e abra o endereço http://localhost:4200/
 
-## 📝 Licença
-
-Esse projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para mais detalhes.
-
 ---
 
 Feito com 💖 by Karina Esparza 👋
