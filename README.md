@@ -44,7 +44,7 @@ Espera-se um banco MySql 8.0 rodando no localhost na porta 3307
 
 9. Entre na pasta `cd \front-end-gestao-veiculos\gestao-veiculos>`
 10. Rode `npm install` para instalar as dependências
-11. Rode `npm start` para iniciar e abra o endereço http://localhost:4200/
+11. Rode `npm start` aguarde iniciar e abra o endereço http://localhost:4200/
 
 ## 📝 Licença
 
