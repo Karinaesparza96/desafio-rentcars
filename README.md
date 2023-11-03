@@ -23,7 +23,7 @@
 
 ## Instruções
 
-## Siga na mesma ordem dos passos a seguir :
+## Siga na mesma ordem os passos a seguir :
 
 ##1 Banco de dados MySQL
 
