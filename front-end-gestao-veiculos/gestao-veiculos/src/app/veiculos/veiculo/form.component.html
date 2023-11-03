@@ -1,0 +1,105 @@
+<div class="content">
+  <mat-card class="card-container">
+    <mat-toolbar class="toolbar" color="primary">
+      <h2>Adicionar Novo Veículo</h2>
+    </mat-toolbar>
+    <mat-card-content>
+      <form
+        class="form"
+        #formDirective="ngForm"
+        [formGroup]="formVeiculo"
+        (ngSubmit)="onSubmit()"
+      >
+        <mat-form-field class="form-group">
+          <mat-label>Selecione uma Locadora</mat-label>
+          <mat-select formControlName="id_locadora">
+            <mat-option
+              *ngFor="let locadora of this.locadoras$ | async"
+              [value]="locadora.id_locadora"
+            >
+              {{ locadora.nome }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="displayMessage" class="error">
+            {{ displayMessage["id_locadora"] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-group">
+          <mat-label>Modelo</mat-label>
+          <input matInput placeholder="Ex.: Onix" formControlName="modelo" />
+          <mat-error *ngIf="displayMessage" class="error">
+            {{ displayMessage["modelo"] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-group">
+          <mat-label>Marca</mat-label>
+          <input
+            matInput
+            placeholder="Ex.: Chevrolet"
+            formControlName="marca"
+          />
+          <mat-error *ngIf="displayMessage" class="error">
+            {{ displayMessage["marca"] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-group">
+          <mat-label>Ano</mat-label>
+          <input
+            matInput
+            placeholder="Ex.: 2023"
+            type="number"
+            formControlName="ano"
+          />
+          <mat-error *ngIf="displayMessage" class="error">
+            {{ displayMessage["ano"] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-group">
+          <mat-label>Motor</mat-label>
+          <input matInput placeholder="Ex.: 1.0" formControlName="motor" />
+          <mat-error *ngIf="displayMessage" class="error">
+            {{ displayMessage["motor"] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-group">
+          <mat-label>Portas</mat-label>
+          <input
+            matInput
+            placeholder="Ex.: 4"
+            type="number"
+            formControlName="portas"
+          />
+          <mat-error *ngIf="displayMessage" class="error">
+            {{ displayMessage["portas"] }}
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="form-group">
+          <mat-label>Câmbio</mat-label>
+          <input matInput placeholder="Ex.: Manual" formControlName="cambio" />
+          <mat-error *ngIf="displayMessage" class="error">
+            {{ displayMessage["cambio"] }}
+          </mat-error>
+        </mat-form-field>
+
+        <div class="checkbox">
+          <mat-checkbox formControlName="ar_condicionado">
+            <mat-label>Ar condicionado</mat-label>
+          </mat-checkbox>
+        </div>
+        <div class="btn">
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            title="Adicionar veículo"
+          >
+            Adicionar
+          </button>
+          <button mat-raised-button type="submit" title="resetar formulário">
+            Resetar
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

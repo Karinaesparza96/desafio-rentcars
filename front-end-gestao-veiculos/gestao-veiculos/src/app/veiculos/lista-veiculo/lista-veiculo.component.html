@@ -1,0 +1,107 @@
+<div class="content table">
+  <button
+    class="btn"
+    (click)="atualizarLista()"
+    mat-stroked-button
+    color="primary"
+  >
+    Atualizar Lista
+  </button>
+  <mat-toolbar class="mat-elevation-z8" color="primary"
+    >Lista dos Veículos :
+  </mat-toolbar>
+  <div>
+    <mat-table class="mat-elevation-z8" [dataSource]="dataSource">
+      <ng-container matColumnDef="locadora">
+        <mat-header-cell *matHeaderCellDef>Locadora</mat-header-cell>
+        <mat-cell *matCellDef="let veiculo">{{
+          veiculo.locadora.nome
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="modelo">
+        <mat-header-cell *matHeaderCellDef>Modelo</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let veiculo">{{
+          veiculo.modelo
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="marca">
+        <mat-header-cell *matHeaderCellDef>Marca</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let veiculo">{{
+          veiculo.marca
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="ano">
+        <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let veiculo">{{
+          veiculo.ano
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="motor">
+        <mat-header-cell *matHeaderCellDef>Motor</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let veiculo">{{
+          veiculo.motor
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="portas">
+        <mat-header-cell *matHeaderCellDef>Portas</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let veiculo">{{
+          veiculo.portas
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="cambio">
+        <mat-header-cell *matHeaderCellDef>Câmbio</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let veiculo">{{
+          veiculo.cambio
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="arCondicionado">
+        <mat-header-cell *matHeaderCellDef>Ar condicionado</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let veiculo">
+          <mat-checkbox
+            [checked]="veiculo.ar_condicionado"
+            disabled="true"
+          ></mat-checkbox>
+        </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dataCricao">
+        <mat-header-cell *matHeaderCellDef>Data Inclusão</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let veiculo">{{
+          veiculo.createdAt | date : "dd/MM/yyyy HH:mm"
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="dataAtualizacao">
+        <mat-header-cell *matHeaderCellDef>Data Atualização</mat-header-cell>
+        <mat-cell class="description-cell" *matCellDef="let veiculo">{{
+          veiculo.updatedAt | date : "dd/MM/yyyy HH:mm"
+        }}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef class="centralizar-acoes">
+          Ações
+        </mat-header-cell>
+        <mat-cell *matCellDef="let veiculo">
+          <button
+            mat-icon-button
+            color="primary"
+            title="Editar veículo"
+            (click)="editar(veiculo)"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-icon-button
+            color="warn"
+            title="Remover veículo"
+            (click)="deletar(veiculo)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+
+      <mat-row *matRowDef="let row; columns: displayColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>
