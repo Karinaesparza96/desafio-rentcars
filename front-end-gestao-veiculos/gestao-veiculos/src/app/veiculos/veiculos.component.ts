@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
     <app-lista-veiculo></app-lista-veiculo>
   `
 })
-export class VeiculosComponent {
-
-}
+export class VeiculosComponent { }

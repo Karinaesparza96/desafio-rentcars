@@ -38,39 +38,34 @@ export class VeiculoFormComponent extends FormBaseComponent implements OnInit, A
     super();
     super.configurarMensagensValidacaoBase(mensagensValidacao);
   }
+
   ngOnInit(): void {
     this.locadoras$ = this.locadoraService.obterTodos()
-
-    this.formVeiculo = this.fb.group({
-      id: [''],
-      id_locadora: ['', Validators.required],
-      modelo: ['', Validators.required],
-      marca: ['', Validators.required],
-      ano: [
-        '',
-        [Validators.required, Validators.pattern(/^\d{4}$/)],
-      ],
-      motor: ['', Validators.required],
-      portas: ['', Validators.required],
-      cambio: ['', Validators.required],
-      ar_condicionado: [false],
-
-    });
-
-    this.veiculoEditService.obterVeiculoParaEdicao().subscribe((veiculo) => {
-      this.veiculo = veiculo
-      this.formVeiculo.patchValue({ ...this.veiculo });
-    })
-
+    this.criarFormGroupVeiculo();
+    this.obterVeiculoParaEdicao()
   }
+
   ngAfterViewInit(): void {
     super.configurarValidacaoFormularioBase(
       this.formInputElements,
       this.formVeiculo
     );
   }
+
+  obterVeiculoParaEdicao() {
+    this.veiculoEditService.obterVeiculoParaEdicao().subscribe((veiculo) => {
+      this.veiculo = veiculo
+      this.atualizarFormularioComVeiculo()
+    })
+  }
+  atualizarFormularioComVeiculo() {
+    if (this.veiculo) {
+      this.formVeiculo.patchValue({ ...this.veiculo });
+    }
+  }
+
   onSubmit() {
-    if (this.formVeiculo.valid) {
+    if (this.formVeiculo.dirty && this.formVeiculo.valid) {
       this.veiculo = { ...this.formVeiculo.value };
 
       if (this.veiculo.id) {
@@ -90,6 +85,23 @@ export class VeiculoFormComponent extends FormBaseComponent implements OnInit, A
           })
       }
     }
+  }
+
+  criarFormGroupVeiculo() {
+    this.formVeiculo = this.fb.group({
+      id: [''],
+      id_locadora: ['', Validators.required],
+      modelo: ['', Validators.required],
+      marca: ['', Validators.required],
+      ano: [
+        '',
+        [Validators.required, Validators.pattern(/^\d{4}$/)],
+      ],
+      motor: ['', Validators.required],
+      portas: ['', Validators.required],
+      cambio: ['', Validators.required],
+      ar_condicionado: [false],
+    });
   }
 
   processarSucesso(res: CustomResponse<Veiculo>) {
@@ -115,5 +127,6 @@ export class VeiculoFormComponent extends FormBaseComponent implements OnInit, A
 
   resetarFormulario() {
     this.formDirective.resetForm();
+    this.formVeiculo.get('ar_condicionado').setValue(false)
   }
 }

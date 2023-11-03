@@ -95,9 +95,16 @@
           >
             Adicionar
           </button>
-          <button mat-raised-button type="submit" title="resetar formulário">
-            Resetar
-          </button>
+          <div>
+            <button
+              mat-raised-button
+              type="button"
+              title="limpar formulário"
+              (click)="resetarFormulario()"
+            >
+              Limpar
+            </button>
+          </div>
         </div>
       </form>
     </mat-card-content>
