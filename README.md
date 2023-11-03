@@ -27,7 +27,7 @@
 
 ##1 Banco de dados MySQL
 
-Esperasse um banco MySql 8.0 rodando no localhost na porta 3307
+Espera-se um banco MySql 8.0 rodando no localhost na porta 3307
 
 ##2 🔥 Instalação e execução da Api
 
