@@ -6,17 +6,14 @@ const Locadora = require("../models/Locadora");
 
 const VeiculoController = {
   async criarVeiculo(req, res) {
-    let sucesso = false;
-
     try {
       let { id, ...veiculo } = req.body;
       veiculo = await Veiculo.create(veiculo, { silent: true });
-      sucesso = true;
 
       CustomResponse(
         res,
         statusCode.CREATE,
-        sucesso,
+        true,
         mensagens.veiculoCriado,
         veiculo
       );
@@ -26,8 +23,6 @@ const VeiculoController = {
   },
 
   async obterTodosVeiculos(req, res) {
-    let sucesso = false;
-
     try {
       const veiculos = await Veiculo.findAll({
         include: [
@@ -38,11 +33,10 @@ const VeiculoController = {
         ],
       });
 
-      sucesso = true;
       CustomResponse(
         res,
         statusCode.OK,
-        sucesso,
+        true,
         mensagens.veiculosObtidos,
         veiculos
       );
@@ -52,7 +46,6 @@ const VeiculoController = {
   },
 
   async obterVeiculoPorId(req, res) {
-    let sucesso = false;
     const { id } = req.params;
 
     try {
@@ -61,11 +54,10 @@ const VeiculoController = {
       if (!veiculo) {
         CustomResponse(res, statusCode.NOTFOUND, sucesso, mensagens.notFound);
       } else {
-        sucesso = true;
         CustomResponse(
           res,
           statusCode.OK,
-          sucesso,
+          true,
           mensagens.veiculoObtido,
           veiculo
         );
@@ -76,7 +68,6 @@ const VeiculoController = {
   },
 
   async atualizarVeiculo(req, res) {
-    let sucesso = false;
     const { id } = req.params;
     try {
       const [linhasAfetadas] = await Veiculo.update(req.body, {
@@ -84,15 +75,9 @@ const VeiculoController = {
       });
 
       if (linhasAfetadas > 0) {
-        sucesso = true;
-        CustomResponse(
-          res,
-          statusCode.OK,
-          sucesso,
-          mensagens.veiculoAtualizadodo
-        );
+        CustomResponse(res, statusCode.OK, true, mensagens.veiculoAtualizadodo);
       } else {
-        CustomResponse(res, statusCode.NOTFOUND, sucesso, mensagens.notFound);
+        CustomResponse(res, statusCode.NOTFOUND, false, mensagens.notFound);
       }
     } catch (error) {
       TratarErros(error, res);
@@ -101,15 +86,13 @@ const VeiculoController = {
 
   async deletarVeiculo(req, res) {
     const { id } = req.params;
-    let sucesso = false;
     try {
       const linhasAfetadas = await Veiculo.destroy({ where: { id } });
 
       if (linhasAfetadas > 0) {
-        sucesso = true;
-        CustomResponse(res, statusCode.OK, sucesso, mensagens.veiculoDeletado);
+        CustomResponse(res, statusCode.OK, true, mensagens.veiculoDeletado);
       } else {
-        CustomResponse(res, statusCode.NOTFOUND, sucesso, mensagens.notFound);
+        CustomResponse(res, statusCode.NOTFOUND, false, mensagens.notFound);
       }
     } catch (error) {
       TratarErros(error, res);

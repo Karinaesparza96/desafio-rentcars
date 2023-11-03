@@ -4,15 +4,13 @@ const { CustomResponse, TratarErros } = require("../utils/controllerUtils");
 
 const LocadoraController = {
   async criarLocadora(req, res) {
-    let sucesso = false;
     const { nome } = req.body;
     try {
       const locadora = await Locadora.create({ nome });
-      sucesso = true;
       CustomResponse(
         res,
         statusCode.CREATE,
-        sucesso,
+        true,
         mensagens.locadoraCriada,
         locadora
       );
@@ -22,15 +20,13 @@ const LocadoraController = {
   },
 
   async obterTodasLocadoras(req, res) {
-    let sucesso = false;
     try {
       const locadoras = await Locadora.findAll();
 
-      sucesso = true;
       CustomResponse(
         res,
         statusCode.OK,
-        sucesso,
+        true,
         mensagens.locadorasObtidas,
         locadoras
       );
