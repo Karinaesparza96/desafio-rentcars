@@ -1,7 +1,16 @@
 <template>
-    <Form @veiculo="carregarVeiculos" :veiculoParaEditar="veiculoSolicitadoParaEditar"/>
-    <TableVeiculo @editar="notificarEditarVeiculo" @excluir="excluir" :veiculos="veiculos"/> 
+    <Form 
+        @veiculo="carregarVeiculos" 
+        :veiculoParaEditar="veiculoSolicitadoParaEditar"
+    />
+    <TableVeiculo 
+        @editar="notificarEditarVeiculo" 
+        @excluir="excluir" 
+        :veiculos="veiculos" 
+        @atualizar="carregarVeiculos"
+    /> 
 </template>
+
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import Form from '@/components/FormVeiculo.vue';

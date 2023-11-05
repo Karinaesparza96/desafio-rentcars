@@ -1,5 +1,10 @@
 <template>
   <div class="container">
+     <div class="row">
+        <button @click="onUpdate" class="btn btn-primary col-2 mb-3">
+          Atualizar lista
+        </button>
+      </div>
     <div>
       <h3 class="my-4">Lista Veiculos : </h3>
     </div>
@@ -7,7 +12,7 @@
       <thead >
         <tr class="text-center">
           <th scope="col"># ID</th>
-          <th scope="col">Nome</th>
+          <th scope="col">Locadora</th>
           <th scope="col">Modelo</th>
           <th scope="col">Marca</th>
           <th scope="col">Ano</th>
@@ -31,7 +36,7 @@
 import ItemVeiculo from './ItemVeiculo.vue';
 
 const props = defineProps(['veiculos'])
-const emits = defineEmits(['editar', 'excluir'])
+const emits = defineEmits(['editar', 'excluir', 'atualizar'])
 
 
 const onEdit = (item: any) => {
@@ -39,6 +44,9 @@ const onEdit = (item: any) => {
 }
 const onClose = (item: any) => {
   emits('excluir', item)
+}
+const onUpdate = () => {
+  emits('atualizar')
 }
 
 </script>
