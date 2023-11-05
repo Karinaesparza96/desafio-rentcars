@@ -15,7 +15,8 @@
 - ⚡ Express
 - 💾 Sequelize
 - Angular CLI: 16.2.8
-
+- Vue 3.3.4
+  
 ## ✋🏻 Pré-requisitos
 
 - [Node.js](https://nodejs.org/en/) >= v18.16.0
@@ -42,10 +43,16 @@ Espera-se um banco MySql 8.0 rodando no localhost na porta 3307
 
 ##3 🔥 Instalação e execução Front-end
 
-9. Entre na pasta `cd \front-end-gestao-veiculos\gestao-veiculos>`
-10. Rode `npm install` para instalar as dependências
-11. Rode `npm start` aguarde iniciar e abra o endereço http://localhost:4200/
+-- Para rodar o projeto Angular: 
 
----
+1. Entre na pasta `cd \front-end-gestao-veiculos\gestao-veiculos-angular>`
+2. Rode `npm install` para instalar as dependências
+3. Rode `npm start` aguarde iniciar e abra o endereço http://localhost:4200/
+
+--- Para rodar o projeto Vue: 
+
+1. Entre na pasta `cd \front-end-gestao-veiculos\gestao-veiculos-vue>`
+2. Rode `npm install` para instalar as dependências
+3. Rode `npm run dev ` aguarde iniciar e clique no endereço localhost que aparecerá
 
 Feito com 💖 by Karina Esparza 👋
