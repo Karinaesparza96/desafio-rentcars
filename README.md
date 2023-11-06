@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-  Api em Node.js com Sequelize, front-end em Angular e banco de dados MySql.
+  Api em Node.js com Sequelize, front-end em Angular e Vue e banco de dados MySql.
 </h3>
 
 <p align="center">Este projeto tem como objetivo realizar a gestão de veículos (CRUD).
